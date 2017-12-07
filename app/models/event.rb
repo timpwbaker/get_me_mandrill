@@ -1,28 +1,23 @@
-require 'time'
+class Event < ActiveResource::Base
+  self.site = ENV.fetch("RETURN_EVENTS_URL")
 
-class DummyEvent
-  def self.build_json
-    new.payload.to_json
+  def self.build_event
+    new(dummy_data)
   end
 
-  def payload
-    {
-      "Address": email_address,
-      "EmailType": email_type,
-      "Event": event,
-      "Timestamp": timestamp
-    }
+  def self.dummy_data
+    { "Address": email_address, "EmailType": email_type, "Event": event, "Timestamp": timestamp }
   end
 
-  def email_address
+  def self.email_address
     emails.shuffle.first
   end
 
-  def email_type
+  def self.email_type
     email_types.shuffle.first
   end
 
-  def event
+  def self.event
     n = Random.rand(100)
     case n
     when 1..60
@@ -34,22 +29,18 @@ class DummyEvent
     end
   end
 
-  def timestamp
-    now = Time.now
-    (now - Random.rand(100000)).to_i
+  def self.timestamp
+    Time.now.to_i
   end
 
-
-
-  def email_types
+  def self.email_types
     ["Order",
      "UserConfirmation",
      "Shipment",
      "ReferAFriend"]
   end
 
-
-  def emails
+  def self.emails
     ["alex@foobar.baz",
      "barney@foobar.baz",
      "callum@foobar.baz",
@@ -68,6 +59,4 @@ class DummyEvent
      "tony@foobar.baz",
      "vitor@foobar.baz"]
   end
-
-
 end
