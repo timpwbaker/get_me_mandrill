@@ -1,24 +1,6 @@
-# README
+# Get me mandrill
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Get me mandrill is a small application for returning dummy mandrill data to
+https://mandrilled.herokuapp.com
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+It received a post request to `/data_requests` and posts back to `/events`
